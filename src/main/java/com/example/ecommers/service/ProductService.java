@@ -2,9 +2,11 @@ package com.example.ecommers.service;
 
 import com.example.ecommers.entity.Product;
 import com.example.ecommers.repository.ProductRepository;
+import com.example.ecommers.spec.ProductSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -44,5 +46,12 @@ public class ProductService {
                         )
                 );
     }
+
+    public List<Product> searchProduct(String catgory, Double minPrice, Double maxPrice, String keyword){
+            Specification<Product> spec = Specification.where(ProductSpecification.hasCatagory(catgory));
+            return productRepository.findAll(spec);
+    }
+
+
 
 }
