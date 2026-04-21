@@ -40,7 +40,7 @@ public class ProductService {
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Product not found with id : " + id
+                                "Product is not found with id : " + id
                         )
                 );
     }
