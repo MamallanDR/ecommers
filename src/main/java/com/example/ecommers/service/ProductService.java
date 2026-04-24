@@ -26,14 +26,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Map<String , Object> getAllProducts(int page , int size ) {
-        Pageable pageable = PageRequest.of(page , size);
+    public Map<String, Object> getAllProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         Page<Product> products = productRepository.findAll(pageable);
 
-        Map<String , Object> response = new HashMap<>();
-        response.put("products" , products.getContent());
-        response.put("totalProducts" , products.getTotalElements());
-        return  response;
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", products.getContent());
+        response.put("totalProducts", products.getTotalElements());
+        return response;
     }
 
 
@@ -47,11 +47,12 @@ public class ProductService {
                 );
     }
 
-    public List<Product> searchProduct(String catgory, Double minPrice, Double maxPrice, String keyword){
-            Specification<Product> spec = Specification.where(ProductSpecification.hasCatagory(catgory));
-            return productRepository.findAll(spec);
+    public List<Product> searchProduct(String catgory, Double minPrice, Double maxPrice, String keyword) {
+        Specification<Product> spec = Specification
+                .where(ProductSpecification.hasCatagory(catgory))
+                .and(ProductSpecification.priceBetween(minPrice, maxPrice))
+                .and(ProductSpecification.asNameOrDescriptionLike(keyword));
+        return productRepository.findAll(spec);
     }
-
-
 
 }
