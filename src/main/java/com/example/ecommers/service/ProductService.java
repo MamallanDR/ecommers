@@ -6,6 +6,7 @@ import com.example.ecommers.spec.ProductSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
-
 @Service
-public class ProductService {
+public class    ProductService {
 
     private final ProductRepository productRepository;
 
@@ -27,7 +26,7 @@ public class ProductService {
     }
 
     public Map<String, Object> getAllProducts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
         Page<Product> products = productRepository.findAll(pageable);
 
         Map<String, Object> response = new HashMap<>();
@@ -47,11 +46,13 @@ public class ProductService {
                 );
     }
 
-    public List<Product> searchProduct(String category, Double minPrice, Double maxPrice, String keyword) {
+    public List<Product> searchProduct(String category, Double minPrice, Double maxPrice, String keyword, Double ratings) {
         Specification<Product> spec = Specification
                 .where(ProductSpecification.hasCategory(category))
                 .and(ProductSpecification.priceBetween(minPrice, maxPrice))
-                .and(ProductSpecification.hasNameOrDescriptionLike(keyword));
+                .and(ProductSpecification.hasNameOrDescriptionLike(keyword))
+                .and(ProductSpecification.ratingGreaterThan(ratings));
+
         return productRepository.findAll(spec);
     }
 

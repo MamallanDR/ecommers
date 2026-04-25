@@ -54,4 +54,13 @@ public class ProductSpecification {
             );
         };
     }
+
+    public static  Specification<Product> ratingGreaterThan(Double rating){
+        return (root , query, criteriaBuilder)->{
+            if (rating == null || rating.isNaN()){
+                return null;
+            }
+            return (criteriaBuilder.greaterThanOrEqualTo(root.get("rating"), rating));
+        };
+    }
 }
