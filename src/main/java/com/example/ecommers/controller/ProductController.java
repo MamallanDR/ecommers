@@ -30,8 +30,8 @@ public class ProductController {
     }
 
 @GetMapping("/search")
-    public List<Product> searchProduct(@RequestParam(required = false) String catagory, @RequestParam(required = false) Double minPrice, @RequestParam(required = false) Double maxPrice, @RequestParam(required = false) String keyword){
-        return productService.searchProduct(catagory,minPrice,maxPrice,keyword);
+    public List<Product> searchProduct(@RequestParam(required = false) String category, @RequestParam(required = false) Double minPrice, @RequestParam(required = false) Double maxPrice, @RequestParam(required = false) String keyword){
+        return productService.searchProduct(category,minPrice,maxPrice,keyword);
     }
 
 }
