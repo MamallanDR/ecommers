@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class    ProductService {
+public class ProductService {
 
     private final ProductRepository productRepository;
 
@@ -46,12 +46,12 @@ public class    ProductService {
                 );
     }
 
-    public List<Product> searchProduct(String category, Double minPrice, Double maxPrice, String keyword, Double ratings) {
+    public List<Product> searchProduct(String category, Double minPrice, Double maxPrice, String keyword, Double rating) {
         Specification<Product> spec = Specification
                 .where(ProductSpecification.hasCategory(category))
                 .and(ProductSpecification.priceBetween(minPrice, maxPrice))
                 .and(ProductSpecification.hasNameOrDescriptionLike(keyword))
-                .and(ProductSpecification.ratingGreaterThan(ratings));
+                .and(ProductSpecification.ratingGreaterThan(rating));
 
         return productRepository.findAll(spec);
     }
