@@ -1,8 +1,8 @@
-package com.example.ecommers.service;
+package com.example.ecommers.product.service;
 
-import com.example.ecommers.entity.Product;
-import com.example.ecommers.repository.ProductRepository;
-import com.example.ecommers.spec.ProductSpecification;
+import com.example.ecommers.product.entity.Product;
+import com.example.ecommers.product.repository.ProductRepository;
+import com.example.ecommers.product.spec.ProductSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
