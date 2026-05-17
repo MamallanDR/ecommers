@@ -2,6 +2,8 @@ package com.example.ecommers.product.spec;
 
 import com.example.ecommers.product.entity.Product;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
+
 
 public class ProductSpecification {
 

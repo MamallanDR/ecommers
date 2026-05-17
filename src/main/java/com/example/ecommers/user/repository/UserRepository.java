@@ -1,12 +1,11 @@
 package com.example.ecommers.user.repository;
 
-import com.example.ecommers.user.entity.Users;
+import com.example.ecommers.user.dto.UserEmailIdDTO;
+import com.example.ecommers.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long> {
-    Optional<Users> findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, Long> {
+    UserEmailIdDTO findByEmailId(String emailId);
 }
